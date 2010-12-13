@@ -25,7 +25,7 @@ To install this module, type the following:
 Dependencies
 ------------
 
-SemVer requires version.
+Plack::Middleware::TweakEnv requires Plack 0.9929 or higher.
 
 Copyright and License
 ---------------------
