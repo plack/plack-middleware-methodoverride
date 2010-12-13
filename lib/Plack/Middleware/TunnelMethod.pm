@@ -33,7 +33,7 @@ __END__
 
 =head1 Name
 
-Plack::Middleware::TunnelMethod - Tunnel REST methods via POST
+Plack::Middleware::TunnelMethod - Tunnel REST methods to Plack apps via POST
 
 =head1 Synopsis
 
