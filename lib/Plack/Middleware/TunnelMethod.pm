@@ -65,7 +65,7 @@ is a good thing, but if you're also trying to support web browsers, you're
 probably going to need some hackish workarounds. This module provides those
 workarounds for your Plack application.
 
-Specifically, you can add a parameter named "x-tunneled-method" to your form
+Specifically, you can add a parameter named C<x-tunneled-method> to your form
 action's query, which can override the request method for a POST. This I<only>
 works for a POST, not a GET.
 
