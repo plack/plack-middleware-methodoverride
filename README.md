@@ -25,7 +25,7 @@ To install this module, type the following:
 Dependencies
 ------------
 
-Plack::Middleware::TweakEnv requires Plack 0.9929 or higher.
+Plack::Middleware::TunnelMethod requires Plack 0.9929 or higher.
 
 Copyright and License
 ---------------------
