@@ -1,4 +1,4 @@
-package Plack::Middleware::TunnelMethod;
+package Plack::Middleware::MethodOverride;
 
 use strict;
 use 5.8.1;
@@ -12,16 +12,16 @@ sub call {
     my $meth = $env->{'plack.original_request_method'} = $env->{REQUEST_METHOD};
 
     if ($meth && uc $meth eq 'POST') {
-        if (my $tunneled = $env->{HTTP_X_HTTP_METHOD_OVERRIDE}) {
+        if (my $override = $env->{HTTP_X_HTTP_METHOD_OVERRIDE}) {
             # Google does this.
-            $env->{REQUEST_METHOD} = $tunneled;
+            $env->{REQUEST_METHOD} = $override;
         } elsif (my $q = $env->{QUERY_STRING}) {
             # Parse the query string.
             my $uri = URI->new('/');
             $uri->query($q);
             my %form = $uri->query_form;
-            if (my $tunneled = $form{'x-tunneled-method'}) {
-                $env->{REQUEST_METHOD} = $tunneled;
+            if (my $override = $form{'x-tunneled-method'}) {
+                $env->{REQUEST_METHOD} = $override;
             }
         }
     }
@@ -33,7 +33,7 @@ __END__
 
 =head1 Name
 
-Plack::Middleware::TunnelMethod - Tunnel REST methods to Plack apps via POST
+Plack::Middleware::MethodOverride - Override REST methods to Plack apps via POST
 
 =head1 Synopsis
 
@@ -41,17 +41,17 @@ In your Plack App:
 
   use Plack::Builder;
   builder {
-      enable TunnelMethod;
+      enable MethodOverride;
       $app;
   };
 
-Tunnel a PUT via a a query parameter in your POST forms:
+PUT via a query parameter in your POST forms:
 
   <form method="POST" action="/foo?x-tunneled-method=PUT">
     <!-- ... -->
   </form>
 
-Or tunnel via the C<x-http-method-override> header in a request:
+Or override it via the C<x-http-method-override> header in a request:
 
   my $req = HTTP::Request->new(POST => '/foo', [
       'x-http-method-override' => 'PUT'
@@ -66,8 +66,8 @@ probably going to need some hackish workarounds. This module provides those
 workarounds for your Plack application.
 
 Specifically, you can add a parameter named C<x-tunneled-method> to your form
-action's query, which can override the request method for a POST. This I<only>
-works for a POST, not a GET.
+action's query, which can override the POST request method. This I<only> works
+for a POST, not a GET.
 
 You can also use a header named C<x-http-method-override> instead (Google uses
 this header for its APIs). This is a bit more efficient, as it requires no
@@ -75,21 +75,21 @@ parsing of the query string parameters.
 
 If either of these attributes are available in a POST request, the
 C<REQUEST_METHOD> key of the Plack environment hash will be replaced with its
-value. This allows your apps to tunnel any HTTP method over POST. If your
-application needs to know that such tunneling has taken place, the original
+value. This allows your apps to override any HTTP method over POST. If your
+application needs to know that such overriding has taken place, the original
 method is stored under the C<plack.original_request_method> key in the Plack
 environment hash.
 
 =head1 Support
 
 This module is stored in an open L<GitHub
-repository|http://github.com/theory/plack-middleware-tunnelmetho/tree/>. Feel
+repository|http://github.com/theory/plack-middleware-methodoverride/tree/>. Feel
 free to fork and contribute!
 
 Please file bug reports via L<GitHub
 Issues|http://github.com/theory/plack-middleware-browserrest/issues/> or by
 sending mail to
-L<bug-Plack-Middleware-TunnelMethod@rt.cpan.org|mailto:bug-Plack-Middleware-TunnelMethod@rt.cpan.org>.
+L<bug-Plack-Middleware-MethodOverride@rt.cpan.org|mailto:bug-Plack-Middleware-MethodOverride@rt.cpan.org>.
 
 =head1 Acknowledgements
 

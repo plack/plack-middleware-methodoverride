@@ -27,7 +27,7 @@
 \b\.#
 
 # Avoid build files.
-^Plack-Request-TunnelMethod
+^Plack-Request-MethodOverride
 
 # Avoid spelling test.
 pod-spelling.t$

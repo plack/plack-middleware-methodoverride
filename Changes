@@ -1,4 +1,4 @@
-Revision history for Perl extension Plack::Middleware::TunnelMethod.
+Revision history for Perl extension Plack::Middleware::MethodOverride.
 
 0.10
       - Initial version.

@@ -6,7 +6,7 @@ use Test::More tests => 12;
 use Plack::Test;
 use URI;
 
-BEGIN { use_ok 'Plack::Middleware::TunnelMethod' or die; }
+BEGIN { use_ok 'Plack::Middleware::MethodOverride' or die; }
 
 my $base_app = sub {
     my $env = shift;
@@ -16,8 +16,8 @@ my $base_app = sub {
         [ "$env->{REQUEST_METHOD} ($env->{'plack.original_request_method'})" ]
     ];
 };
-ok my $app = Plack::Middleware::TunnelMethod->wrap($base_app),
-    'Create TunnelMethod app with no args';
+ok my $app = Plack::Middleware::MethodOverride->wrap($base_app),
+    'Create MethodOverride app with no args';
 
 my $uri = URI->new('/');
 
@@ -36,16 +36,16 @@ test_psgi $app, sub {
     is $res->content, 'POST (POST)', 'POST should be POST';
 };
 
-# Tunnel over POST.
+# Override over POST.
 $uri->query_form('x-tunneled-method' => 'PUT');
 test_psgi $app, sub {
     my $res = shift->(HTTP::Request->new(POST => $uri));
-    is $res->content, 'PUT (POST)', 'Should tunnel PUT over POST';
+    is $res->content, 'PUT (POST)', 'Should send PUT over POST';
 };
 
 test_psgi $app, sub {
     my $res = shift->(HTTP::Request->new(GET => $uri));
-    is $res->content, 'GET (GET)', 'Should not tunnel PUT over GET';
+    is $res->content, 'GET (GET)', 'Should not send PUT over GET';
 };
 
 # Try to confuse the parser.
@@ -55,11 +55,11 @@ test_psgi $app, sub {
     is $res->content, 'POST (POST)', 'POST should be POST with no tunnel';
 };
 
-# Tunnel DELETE
+# Override with a DELETE
 $uri->query_form('x-tunneled-method' => 'DELETE', PUT => 'x-tunneled-method');
 test_psgi $app, sub {
     my $res = shift->(HTTP::Request->new(POST => $uri));
-    is $res->content, 'DELETE (POST)', 'Should tunnel DELETE over POST';
+    is $res->content, 'DELETE (POST)', 'Should send DELETE over POST';
 };
 
 ##############################################################################
@@ -67,18 +67,18 @@ test_psgi $app, sub {
 my $head =  ['x-http-method-override' => 'PUT'];
 test_psgi $app, sub {
     my $res = shift->(HTTP::Request->new(POST => '/', $head));
-    is $res->content, 'PUT (POST)', 'Should tunnel PUT over POST via header';
+    is $res->content, 'PUT (POST)', 'Should send PUT over POST via header';
 };
 
 test_psgi $app, sub {
     my $res = shift->(HTTP::Request->new(GET => '/', $head));
-    is $res->content, 'GET (GET)', 'Should not tunnel PUT over GET via header';
+    is $res->content, 'GET (GET)', 'Should not send PUT over GET via header';
 };
 
 # Try a different method.
 $head->[1] = 'OPTIONS';
 test_psgi $app, sub {
     my $res = shift->(HTTP::Request->new(POST => '/', $head));
-    is $res->content, 'OPTIONS (POST)', 'Should tunnel OPTIONS over POST via header';
+    is $res->content, 'OPTIONS (POST)', 'Should send OPTIONS over POST via header';
 };
 

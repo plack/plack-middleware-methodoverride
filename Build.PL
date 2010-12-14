@@ -3,7 +3,7 @@ use warnings;
 use Module::Build;
 
 Module::Build->new(
-    module_name        => 'Plack::Middleware::TunnelMethod',
+    module_name        => 'Plack::Middleware::MethodOverride',
     license            => 'perl',
     configure_requires => {
         'Module::Build' => '0.30',
@@ -24,9 +24,9 @@ Module::Build->new(
     },
     meta_merge => {
         resources => {
-            homepage   => 'http://search.cpan.org/dist/Plack-Middleware-TunnelMethod/',
-            bugtracker => 'http://github.com/theory/plack-middleware-tunnelmethod/issues/',
-            repository => 'http://github.com/theory/plack-middleware-tunnelmethod/tree/',
+            homepage   => 'http://search.cpan.org/dist/Plack-Middleware-MethodOverride/',
+            bugtracker => 'http://github.com/theory/plack-middleware-methodoverride/issues/',
+            repository => 'http://github.com/theory/plack-middleware-methodoverride/tree/',
         }
     },
 )->create_build_script;
