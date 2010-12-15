@@ -157,7 +157,7 @@ repository|http://github.com/theory/plack-middleware-methodoverride/tree/>. Feel
 free to fork and contribute!
 
 Please file bug reports via L<GitHub
-Issues|http://github.com/theory/plack-middleware-browserrest/issues/> or by
+Issues|http://github.com/theory/plack-middleware-methodoverride/issues/> or by
 sending mail to
 L<bug-Plack-Middleware-MethodOverride@rt.cpan.org|mailto:bug-Plack-Middleware-MethodOverride@rt.cpan.org>.
 
