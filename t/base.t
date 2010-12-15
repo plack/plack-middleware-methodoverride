@@ -1,7 +1,7 @@
 #!/usr/bin/env perl -w
 
 use strict;
-use Test::More tests => 30;
+use Test::More tests => 33;
 #use Test::More 'no_plan';
 use Plack::Test;
 use URI;
@@ -106,3 +106,22 @@ for my $meth (qw(FOO SUCK CALL EXEC)) {
         is $res->content, "POST (POST)", "Should not support $meth";
     };
 }
+##############################################################################
+# Now modify the param and the header.
+ok $app = Plack::Middleware::MethodOverride->wrap(
+    $base_app,
+    param => 'x-do-this',
+    header => 'X-Do-It-Man',
+), 'Create MethodOverride app with no param and header params';
+
+$uri->query_form('x-do-this' => 'PUT');
+test_psgi $app, sub {
+    my $res = shift->(HTTP::Request->new(POST => $uri));
+    is $res->content, 'PUT (POST)', 'Should get PUT for custom param'
+};
+
+$head = ['X-Do-It-man' => 'DELETE'];
+test_psgi $app, sub {
+    my $res = shift->(HTTP::Request->new(POST => '/', $head));
+    is $res->content, 'DELETE (POST)', 'Should send DELETE over POST via custom header';
+};
