@@ -1,6 +1,6 @@
 Revision history for Perl extension Plack::Middleware::MethodOverride.
 
-0.10
+0.10  2010-12-15T04:16:40
       - Initial version.
       - Merged code from Plack core.
       - Added support for a query parameter to override the method.
