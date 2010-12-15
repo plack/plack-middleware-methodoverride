@@ -90,16 +90,13 @@ Or override it via the C<x-http-method-override> header in a request:
 Writing
 L<REST|http://en.wikipedia.org/wiki/Representational_State_Transfer>ful apps
 is a good thing, but if you're also trying to support web browsers, you're
-probably going to need some hackish workarounds. This module provides those
-workarounds for your Plack application.
+probably going to need some hackish workarounds. This module provides one such
+workaround for your Plack applications.
 
-Specifically, you can add a parameter named C<x-tunneled-method> to your form
-action's query, which can override the POST request method. This I<only> works
-for a POST, not a GET.
-
-You can also use a header named C<x-http-method-override> instead (Google uses
-this header for its APIs). This is a bit more efficient, as it requires no
-parsing of the query string parameters.
+Specifically, you can also use a header named C<X-HTTP-Method-Override> (as
+used by Google for its APIs) override the POST request method. Or you can add
+a parameter named C<x-tunneled-method> to your form action's query. Either
+way, the overriding works I<only> via POST requests, not GET.
 
 If either of these attributes are available in a POST request, the
 C<REQUEST_METHOD> key of the Plack environment hash will be replaced with its

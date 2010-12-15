@@ -6,4 +6,6 @@ Revision history for Perl extension Plack::Middleware::MethodOverride.
       - Added support for a query parameter to override the method.
       - Method overriding allowed only via POST.
       - All currently-supported HTTP methods are allowed.
+      - Original method available in the Plack environment hash under the
+        `plack.original_request_method` key.
 
