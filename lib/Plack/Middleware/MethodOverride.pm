@@ -7,6 +7,8 @@ use URI;
 
 our $VERSION = '0.10';
 
+my %ALLOWED = map { $_ => undef } qw(GET HEAD PUT DELETE OPTIONS TRACE CONNECT);
+
 sub call {
     my ($self, $env) = @_;
     my $meth = $env->{'plack.original_request_method'} = $env->{REQUEST_METHOD};
@@ -14,14 +16,14 @@ sub call {
     if ($meth && uc $meth eq 'POST') {
         if (my $override = $env->{HTTP_X_HTTP_METHOD_OVERRIDE}) {
             # Google does this.
-            $env->{REQUEST_METHOD} = $override;
+            $env->{REQUEST_METHOD} = uc $override if exists $ALLOWED{uc $override };
         } elsif (my $q = $env->{QUERY_STRING}) {
             # Parse the query string.
             my $uri = URI->new('/');
             $uri->query($q);
             my %form = $uri->query_form;
             if (my $override = $form{'x-tunneled-method'}) {
-                $env->{REQUEST_METHOD} = $override;
+                $env->{REQUEST_METHOD} = uc $override if exists $ALLOWED{uc $override };
             }
         }
     }
@@ -79,6 +81,28 @@ value. This allows your apps to override any HTTP method over POST. If your
 application needs to know that such overriding has taken place, the original
 method is stored under the C<plack.original_request_method> key in the Plack
 environment hash.
+
+The list of methods you can specify are:
+
+=over
+
+=item GET
+
+=item POST
+
+=item HEAD
+
+=item PUT
+
+=item DELETE
+
+=item OPTIONS
+
+=item TRACE
+
+=item CONNECT
+
+=back
 
 =head1 Support
 

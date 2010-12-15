@@ -1,7 +1,7 @@
 #!/usr/bin/env perl -w
 
 use strict;
-use Test::More tests => 12;
+use Test::More tests => 30;
 #use Test::More 'no_plan';
 use Plack::Test;
 use URI;
@@ -82,3 +82,27 @@ test_psgi $app, sub {
     is $res->content, 'OPTIONS (POST)', 'Should send OPTIONS over POST via header';
 };
 
+# Make sure all supported methods work.
+for my $meth (qw(GET HEAD PUT DELETE OPTIONS TRACE CONNECT)) {
+    $head->[1] = $meth;
+    test_psgi $app, sub {
+        my $res = shift->(HTTP::Request->new(POST => '/', $head));
+        is $res->content, "$meth (POST)", "Should support $meth";
+    };
+
+    # Lowercase too.
+    $head->[1] = lc $meth;
+    test_psgi $app, sub {
+        my $res = shift->(HTTP::Request->new(POST => '/', $head));
+        is $res->content, "$meth (POST)", "Should support $meth";
+    };
+}
+
+# Make sure no other methods are allowed.
+for my $meth (qw(FOO SUCK CALL EXEC)) {
+    $head->[1] = $meth;
+    test_psgi $app, sub {
+        my $res = shift->(HTTP::Request->new(POST => '/', $head));
+        is $res->content, "POST (POST)", "Should not support $meth";
+    };
+}
