@@ -1,4 +1,4 @@
-Plack/Middleware/MethodOverride version 0.10
+Plack/Middleware/MethodOverride version 0.11
 ============================================
 
 This module provides middleware to support requesting HTTP methods via POST.
