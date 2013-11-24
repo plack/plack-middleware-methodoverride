@@ -26,7 +26,7 @@ Module::Build->new(
         resources => {
             homepage   => 'http://search.cpan.org/dist/Plack-Middleware-MethodOverride/',
             bugtracker => 'http://github.com/theory/plack-middleware-methodoverride/issues/',
-            repository => 'http://github.com/theory/plack-middleware-methodoverride/tree/',
+            repository => 'http://github.com/theory/plack-middleware-methodoverride',
         }
     },
 )->create_build_script;
