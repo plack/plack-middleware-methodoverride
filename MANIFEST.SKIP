@@ -29,5 +29,5 @@
 # Avoid build files.
 ^Plack-Request-MethodOverride
 
-# Avoid spelling test.
-pod-spelling.t$
+# Avoid Pod tests.
+t/pod[^.]*\.t

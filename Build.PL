@@ -23,7 +23,7 @@ Module::Build->new(
             homepage   => 'http://search.cpan.org/dist/Plack-Middleware-MethodOverride/',
             bugtracker => 'http://github.com/theory/plack-middleware-methodoverride/issues/',
             repository => 'http://github.com/theory/plack-middleware-methodoverride',
-        }
+        },
         prereqs => {
             develop => {
                 recommends => {
