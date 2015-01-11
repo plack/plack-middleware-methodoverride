@@ -19,8 +19,7 @@ Module::Build->new(
         'URI'           => 0,
     },
     recommends => {
-        'Test::Pod'           => '1.41',
-        'Test::Pod::Coverage' => '1.06',
+        'Test::Pod'     => '1.41',
     },
     meta_merge => {
         resources => {
