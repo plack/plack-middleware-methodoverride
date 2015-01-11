@@ -7,6 +7,6 @@ Build
 _build
 cover_db/
 Plack-Middleware-MethodOverride-*
-META.yml
-MYMETA.yml
+META.*
+MYMETA.*
 MANIFEST
