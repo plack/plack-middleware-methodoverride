@@ -1,5 +1,7 @@
 Revision history for Perl extension Plack::Middleware::MethodOverride.
 
+0.12
+
 0.11  2015-01-12T19:26:57Z
       - Fixed broken link to GitHub issues in the documentation.
       - Removed Test::Pod::Coverage recommendation from Build.PL. This
