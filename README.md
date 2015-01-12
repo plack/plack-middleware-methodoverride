@@ -8,6 +8,8 @@ Specifically, you can provide a query parameter named "x-tunneled-method" or a
 header named "x-http-method-override" (as used by Google's APIs). Either way,
 the overriding works only via POST requests, not GET.
 
+[![Build Status](https://travis-ci.org/theory/plack-middleware-methodoverride.png)](https://travis-ci.org/theory/dbix-connector)
+
 Installation
 ============
 
