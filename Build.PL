@@ -13,10 +13,11 @@ Module::Build->new(
         'Test::More'    => '0.70',
     },
     requires => {
-        'Test::Builder' => '0.70',
-        'Plack'         => '0.9929',
-        'perl'          => 5.008001,
-        'URI'           => 0,
+        'perl'                  => '5.008001',
+        'Plack'                 => '0.9929',
+        'Plack::Util::Accessor' => '0',
+        'Test::Builder'         => '0.70',
+        'URI'                   => '0',
     },
     meta_merge => {
         resources => {
