@@ -3,17 +3,17 @@ package Plack::Middleware::MethodOverride;
 use strict;
 use 5.8.1;
 use parent qw(Plack::Middleware);
+use Plack::Util::Accessor 'param';
 use URI;
 our $VERSION = '0.12';
 
 my %ALLOWED = map { $_ => undef } qw(GET HEAD PUT DELETE OPTIONS TRACE CONNECT);
 
 sub new {
-    my $self = shift->SUPER::new(
-        param  => 'x-tunneled-method',
-        (@_ == 1 && ref $_[0] eq 'HASH' ? %{ +shift } : @_),
-    );
-    $self->header($self->header || 'X-HTTP-Method-Override');
+    my $class = shift;
+    my $self = $class->SUPER::new(@_);
+    $self->param('x-tunneled-method') if not exists $self->{param};
+    $self->header(exists $self->{header} ? $self->{header} : 'X-HTTP-Method-Override');
     return $self;
 }
 
@@ -40,20 +40,13 @@ sub call {
 
 sub header {
     my $self = shift;
-    return $self->{header} unless @_;
-    if ($_[0]) {
-        my $key = shift;
-        $key =~ tr/-/_/;
-        return $self->{header} = 'HTTP_' . uc $key;
-    } else {
-        $self->{header} = shift;
-    }
-}
 
-sub param {
-    my $self = shift;
-    return $self->{param} unless @_;
-    return $self->{param} = shift;
+    return $self->{header}      if not @_;
+    return $self->{header} = '' if not $_[0];
+
+    my $key = $_[0];
+    $key =~ tr/-/_/;
+    return $self->{header} = 'HTTP_' . uc $key;
 }
 
 1;
