@@ -7,15 +7,16 @@ package Plack::Middleware::MethodOverride;
 # ABSTRACT: Override REST methods to Plack apps via POST
 
 use parent 'Plack::Middleware';
+use Plack::Util::Accessor 'param';
 
 my %ALLOWED = map { $_ => undef } qw(GET HEAD PUT DELETE OPTIONS TRACE CONNECT);
 
 sub new {
-    my $self = shift->SUPER::new(
-        param  => 'x-tunneled-method',
-        (@_ == 1 && ref $_[0] eq 'HASH' ? %{ +shift } : @_),
-    );
-    $self->header($self->header || 'X-HTTP-Method-Override');
+    my $class = shift;
+    my $self = $class->SUPER::new(@_);
+    $self->{param}  = 'x-tunneled-method'      unless exists $self->{param};
+    $self->{header} = 'X-HTTP-Method-Override' unless exists $self->{header};
+    $self->header($self->{header}); # munge it
     return $self;
 }
 
@@ -42,20 +43,12 @@ sub call {
 
 sub header {
     my $self = shift;
-    return $self->{header} unless @_;
-    if ($_[0]) {
-        my $key = shift;
-        $key =~ tr/-/_/;
-        return $self->{header} = 'HTTP_' . uc $key;
-    } else {
-        $self->{header} = shift;
-    }
-}
 
-sub param {
-    my $self = shift;
-    return $self->{param} unless @_;
-    return $self->{param} = shift;
+    return $self->{header}      if not @_;
+    return $self->{header} = '' if not $_[0];
+
+    (my $key = 'HTTP_'.$_[0]) =~ tr/-a-z/_A-Z/;
+    return $self->{header} = $key;
 }
 
 1;
