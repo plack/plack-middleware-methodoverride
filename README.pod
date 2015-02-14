@@ -1,66 +1,16 @@
-use 5.008001;
-use strict;
-use URI ();
+=pod
 
-package Plack::Middleware::MethodOverride;
+=encoding UTF-8
 
-# ABSTRACT: Override REST methods to Plack apps via POST
+=head1 NAME
 
-use parent 'Plack::Middleware';
+Plack::Middleware::MethodOverride - Override REST methods to Plack apps via POST
 
-my %ALLOWED = map { $_ => undef } qw(GET HEAD PUT DELETE OPTIONS TRACE CONNECT);
+=head1 VERSION
 
-sub new {
-    my $self = shift->SUPER::new(
-        param  => 'x-tunneled-method',
-        (@_ == 1 && ref $_[0] eq 'HASH' ? %{ +shift } : @_),
-    );
-    $self->header($self->header || 'X-HTTP-Method-Override');
-    return $self;
-}
+version 0.12
 
-sub call {
-    my ($self, $env) = @_;
-    my $meth = $env->{'plack.original_request_method'} = $env->{REQUEST_METHOD};
-
-    if ($meth && uc $meth eq 'POST') {
-        if (my $override = $env->{$self->header}) {
-            # Google does this.
-            $env->{REQUEST_METHOD} = uc $override if exists $ALLOWED{uc $override };
-        } elsif (my $q = $env->{QUERY_STRING}) {
-            # Parse the query string.
-            my $uri = URI->new('/');
-            $uri->query($q);
-            my %form = $uri->query_form;
-            if (my $override = $form{$self->param}) {
-                $env->{REQUEST_METHOD} = uc $override if exists $ALLOWED{uc $override };
-            }
-        }
-    }
-    $self->app->($env);
-}
-
-sub header {
-    my $self = shift;
-    return $self->{header} unless @_;
-    if ($_[0]) {
-        my $key = shift;
-        $key =~ tr/-/_/;
-        return $self->{header} = 'HTTP_' . uc $key;
-    } else {
-        $self->{header} = shift;
-    }
-}
-
-sub param {
-    my $self = shift;
-    return $self->{param} unless @_;
-    return $self->{param} = shift;
-}
-
-1;
-
-__END__
+=for html <a href="https://travis-ci.org/theory/plack-middleware-methodoverride"><img alt="Build Status" src="https://travis-ci.org/theory/plack-middleware-methodoverride.png" /></a>
 
 =head1 SYNOPSIS
 
@@ -149,5 +99,26 @@ Pagaltzis|http://plasmasturm.org/> for the shove in this direction, to L<Matt
 S Trout|http://www.trout.me.uk/> for suggesting that it be implemented as
 middleware, and to L<Hans Dieter Pearcey|http://www.weftsoar.net/> for
 convincing me not to parse body parameters.
+
+=head1 AUTHORS
+
+=over 4
+
+=item *
+
+David E. Wheeler <david@justatheory.com>
+
+=item *
+
+Aristotle Pagaltzis <pagaltzis@gmx.de>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2015 by David E. Wheeler.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

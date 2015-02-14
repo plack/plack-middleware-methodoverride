@@ -1,13 +1,14 @@
 Revision history for Perl extension Plack::Middleware::MethodOverride.
 
 0.12
+      - Switched to Dist::Zilla and ExtUtils::MakeMaker
 
-0.11  2015-01-12T19:26:57Z
+0.11  2015-01-12
       - Fixed broken link to GitHub issues in the documentation.
       - Removed Test::Pod::Coverage recommendation from Build.PL. This
         distribution never used it.
 
-0.10  2010-12-15T04:16:40
+0.10  2010-12-15
       - Initial version.
       - Merged code from Plack core.
       - Added support for a query parameter to override the method.
