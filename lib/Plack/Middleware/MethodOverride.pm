@@ -9,7 +9,7 @@ package Plack::Middleware::MethodOverride;
 use parent 'Plack::Middleware';
 use Plack::Util::Accessor 'param';
 
-my %ALLOWED = map { $_ => undef } qw(GET HEAD PUT DELETE OPTIONS TRACE CONNECT);
+my %allowed_method = map { $_ => undef } qw(GET HEAD PUT DELETE OPTIONS TRACE CONNECT);
 
 sub new {
     my $class = shift;
@@ -24,17 +24,14 @@ sub call {
     my ($self, $env) = @_;
     my $meth = $env->{'plack.original_request_method'} = $env->{REQUEST_METHOD};
 
-    if ($meth && uc $meth eq 'POST') {
-        if (my $override = $env->{$self->header}) {
-            # Google does this.
-            $env->{REQUEST_METHOD} = uc $override if exists $ALLOWED{uc $override };
-        } elsif (exists $env->{QUERY_STRING}) {
-            my $p = Plack::Request->new($env)->query_parameters;
-            if (my $override = $p->{$self->param}) {
-                $env->{REQUEST_METHOD} = uc $override if exists $ALLOWED{uc $override };
-            }
-        }
+    if ($meth and uc $meth eq 'POST') {
+        my $override = uc (
+            $env->{$self->header}
+            or $env->{QUERY_STRING} && Plack::Request->new($env)->query_parameters->{$self->param}
+        );
+        $env->{REQUEST_METHOD} = $override if exists $allowed_method{$override};
     }
+
     $self->app->($env);
 }
 
