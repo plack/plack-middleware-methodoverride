@@ -1,6 +1,6 @@
 use 5.008001;
 use strict;
-use URI ();
+use Plack::Request ();
 
 package Plack::Middleware::MethodOverride;
 
@@ -28,12 +28,9 @@ sub call {
         if (my $override = $env->{$self->header}) {
             # Google does this.
             $env->{REQUEST_METHOD} = uc $override if exists $ALLOWED{uc $override };
-        } elsif (my $q = $env->{QUERY_STRING}) {
-            # Parse the query string.
-            my $uri = URI->new('/');
-            $uri->query($q);
-            my %form = $uri->query_form;
-            if (my $override = $form{$self->param}) {
+        } elsif (exists $env->{QUERY_STRING}) {
+            my $p = Plack::Request->new($env)->query_parameters;
+            if (my $override = $p->{$self->param}) {
                 $env->{REQUEST_METHOD} = uc $override if exists $ALLOWED{uc $override };
             }
         }
