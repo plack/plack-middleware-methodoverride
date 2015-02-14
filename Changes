@@ -1,6 +1,6 @@
 Revision history for Perl extension Plack::Middleware::MethodOverride.
 
-0.12
+0.12  2015-02-14
       - Switched to Dist::Zilla and ExtUtils::MakeMaker
       - Use Plack::Request rather than URI to parse query parameters
 
