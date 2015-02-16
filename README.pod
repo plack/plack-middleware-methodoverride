@@ -118,7 +118,7 @@ Aristotle Pagaltzis <pagaltzis@gmx.de>
 
 =head1 Copyright and License
 
-This software is copyright (c) 2015 by David E. Wheeler.
+This software is copyright (c) 2015 by Tatsuhiko Miyagawa, David E. Wheeler, Aristotle Pagaltzis.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
