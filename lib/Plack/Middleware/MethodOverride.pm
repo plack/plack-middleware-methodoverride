@@ -49,7 +49,7 @@ sub header {
 
 __END__
 
-=head1 SYNOPSIS
+=head1 Synopsis
 
 In your Plack app:
 
@@ -71,7 +71,7 @@ Or override it via the C<X-HTTP-Method-Override> header in a request:
       'X-HTTP-Method-Override' => 'PUT'
   ]);
 
-=head1 DESCRIPTION
+=head1 Description
 
 Writing
 L<REST|http://en.wikipedia.org/wiki/Representational_State_Transfer>ful apps
@@ -107,7 +107,7 @@ If so, then the C<REQUEST_METHOD> in the PSGI environment will be replaced
 with the client's desired value. The original request method is always stored
 under the C<plack.original_request_method> key.
 
-=head1 CONFIGURATION
+=head1 Configuration
 
 These are the named arguments you can pass to C<new>. Or, more likely, on the
 C<enable> line in your C<builder> block, as in
@@ -126,7 +126,7 @@ Specifies the query parameter name to specify the overriding HTTP method.
 
 Defaults to C<x-tunneled-method>.
 
-=head1 ACKNOWLEDGEMENTS
+=head1 Acknowledgements
 
 This module gleefully steals from
 L<Catalyst::TraitFor::Request::REST::ForBrowsers> by Dave Rolsky and the

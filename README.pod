@@ -2,17 +2,15 @@
 
 =encoding UTF-8
 
-=head1 NAME
+=head1 Name
 
 Plack::Middleware::MethodOverride - Override REST methods to Plack apps via POST
 
-=head1 VERSION
+=head1 Version
 
 version 0.13
 
-=for html <a href="https://travis-ci.org/theory/plack-middleware-methodoverride"><img alt="Build Status" src="https://travis-ci.org/theory/plack-middleware-methodoverride.png" /></a>
-
-=head1 SYNOPSIS
+=head1 Synopsis
 
 In your Plack app:
 
@@ -34,7 +32,7 @@ Or override it via the C<X-HTTP-Method-Override> header in a request:
       'X-HTTP-Method-Override' => 'PUT'
   ]);
 
-=head1 DESCRIPTION
+=head1 Description
 
 Writing
 L<REST|http://en.wikipedia.org/wiki/Representational_State_Transfer>ful apps
@@ -70,7 +68,7 @@ If so, then the C<REQUEST_METHOD> in the PSGI environment will be replaced
 with the client's desired value. The original request method is always stored
 under the C<plack.original_request_method> key.
 
-=head1 CONFIGURATION
+=head1 Configuration
 
 These are the named arguments you can pass to C<new>. Or, more likely, on the
 C<enable> line in your C<builder> block, as in
@@ -89,7 +87,7 @@ Specifies the query parameter name to specify the overriding HTTP method.
 
 Defaults to C<x-tunneled-method>.
 
-=head1 ACKNOWLEDGEMENTS
+=head1 Acknowledgements
 
 This module gleefully steals from
 L<Catalyst::TraitFor::Request::REST::ForBrowsers> by Dave Rolsky and the
@@ -106,6 +104,10 @@ convincing me not to parse body parameters.
 
 =item *
 
+Tatsuhiko Miyagawa <miyagawa@bulknews.net>
+
+=item *
+
 David E. Wheeler <david@justatheory.com>
 
 =item *
@@ -114,7 +116,7 @@ Aristotle Pagaltzis <pagaltzis@gmx.de>
 
 =back
 
-=head1 COPYRIGHT AND LICENSE
+=head1 Copyright and License
 
 This software is copyright (c) 2015 by David E. Wheeler.
 
