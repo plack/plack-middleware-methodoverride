@@ -1,12 +1,3 @@
-*.bak
-*~
-*.old
-blib/
-pm_to_blib
-Build
-_build
-cover_db/
-Plack-Middleware-MethodOverride-*
-META.*
-MYMETA.*
-MANIFEST
+# add files you don't want in git here
+/Plack-Middleware-MethodOverride-*
+.build/
