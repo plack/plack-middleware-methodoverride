@@ -28,6 +28,7 @@ sub call {
         my $override = uc (
             $env->{$self->header}
             or $env->{QUERY_STRING} && Plack::Request->new($env)->query_parameters->{$self->param}
+            or ''
         );
         $env->{REQUEST_METHOD} = $override if exists $allowed_method{$override};
     }
