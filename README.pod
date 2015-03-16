@@ -10,6 +10,16 @@ Plack::Middleware::MethodOverride - Override REST methods to Plack apps via POST
 
 version 0.13
 
+=begin html
+
+<p>
+<a href="http://badge.fury.io/pl/Plack-Middleware-MethodOverride"><img src="https://badge.fury.io/pl/Plack-Middleware-MethodOverride.svg" alt="CPAN version /></a>
+<a href="https://travis-ci.org/theory/plack-middleware-methodoverride"><img src="https://travis-ci.org/theory/plack-middleware-methodoverride.svg" alt="Build Status" /></a>
+<a href="https://coveralls.io/r/theory/plack-middleware-methodoverride"><img src="https://coveralls.io/repos/theory/plack-middleware-methodoverride/badge.svg" alt="Coverage Status" /></a>
+</p>
+
+=end html
+
 =head1 Synopsis
 
 In your Plack app:
