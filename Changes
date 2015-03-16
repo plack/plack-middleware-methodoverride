@@ -1,7 +1,8 @@
 Revision history for Perl extension Plack::Middleware::MethodOverride.
 
 0.13
-      - Removed a bunch of cruft from the CPAN distribution
+      - Removed a bunch of cruft from the CPAN distribution.
+      - Fixed "Use of uninitialized value in uc" warning.
 
 0.12  2015-02-14
       - Switched to Dist::Zilla and ExtUtils::MakeMaker
