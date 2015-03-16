@@ -2,11 +2,11 @@
 
 =encoding UTF-8
 
-=head1 Name
+=head1 NAME
 
 Plack::Middleware::MethodOverride - Override REST methods to Plack apps via POST
 
-=head1 Version
+=head1 VERSION
 
 version 0.13
 
@@ -116,7 +116,7 @@ Aristotle Pagaltzis <pagaltzis@gmx.de>
 
 =back
 
-=head1 Copyright and License
+=head1 COPYRIGHT AND LICENSE
 
 This software is copyright (c) 2015 by Tatsuhiko Miyagawa, David E. Wheeler, Aristotle Pagaltzis.
 
