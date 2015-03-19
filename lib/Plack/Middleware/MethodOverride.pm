@@ -1,5 +1,6 @@
 use 5.008001;
 use strict;
+use warnings;
 use Plack::Request ();
 
 package Plack::Middleware::MethodOverride;
@@ -25,6 +26,7 @@ sub call {
     my $meth = $env->{'plack.original_request_method'} = $env->{REQUEST_METHOD};
 
     if ($meth and uc $meth eq 'POST') {
+        no warnings 'uninitialized';
         my $override = uc (
             $env->{$self->header}
             or $env->{QUERY_STRING} && Plack::Request->new($env)->query_parameters->{$self->param}
