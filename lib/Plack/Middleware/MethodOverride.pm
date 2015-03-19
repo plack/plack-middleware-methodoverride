@@ -86,21 +86,21 @@ what method it actually meant. That is, as long as it meant one of these:
 
 =over
 
-=item GET
+=item * GET
 
-=item POST
+=item * POST
 
-=item HEAD
+=item * HEAD
 
-=item PUT
+=item * PUT
 
-=item DELETE
+=item * DELETE
 
-=item OPTIONS
+=item * OPTIONS
 
-=item TRACE
+=item * TRACE
 
-=item CONNECT
+=item * CONNECT
 
 =back
 
