@@ -1,7 +1,7 @@
 #!/usr/bin/env perl -w
 
 use strict;
-use Test::More tests => 33;
+use Test::More tests => 35;
 #use Test::More 'no_plan';
 use Plack::Test;
 use URI;
@@ -83,7 +83,7 @@ test_psgi $app, sub {
 };
 
 # Make sure all supported methods work.
-for my $meth (qw(GET HEAD PUT DELETE OPTIONS TRACE CONNECT)) {
+for my $meth (qw(GET HEAD PUT PATCH DELETE OPTIONS TRACE CONNECT)) {
     $head->[1] = $meth;
     test_psgi $app, sub {
         my $res = shift->(HTTP::Request->new(POST => '/', $head));
