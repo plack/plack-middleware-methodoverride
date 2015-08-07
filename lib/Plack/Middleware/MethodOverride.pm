@@ -10,7 +10,7 @@ package Plack::Middleware::MethodOverride;
 use parent 'Plack::Middleware';
 use Plack::Util::Accessor 'param';
 
-my %allowed_method = map { $_ => undef } qw(GET HEAD PUT PATCH DELETE OPTIONS TRACE CONNECT);
+my %allowed_method = map { $_ => undef } qw(GET HEAD PUT DELETE OPTIONS TRACE CONNECT PATCH);
 
 sub new {
     my $class = shift;
@@ -102,6 +102,8 @@ what method it actually meant. That is, as long as it meant one of these:
 =item * TRACE
 
 =item * CONNECT
+
+=item * PATCH
 
 =back
 
