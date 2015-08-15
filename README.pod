@@ -8,7 +8,7 @@ Plack::Middleware::MethodOverride - Override REST methods to Plack apps via POST
 
 =head1 Version
 
-version 0.15
+version 0.16
 
 =begin html
 
