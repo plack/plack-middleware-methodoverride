@@ -1,5 +1,7 @@
 Revision history for Perl extension Plack::Middleware::MethodOverride.
 
+0.16
+
 0.15  2015-08-15T01:33:43Z
       - Added the PATCH method. Contributed by Yuuki Furuyama.
 
