@@ -34,6 +34,17 @@
             "Dist::Milla" : "v1.0.20",
             "Test::Pod" : "1.41"
          }
+      },
+      "runtime" : {
+         "requires" : {
+            "Plack::Request" : "0"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Plack::Test" : "0",
+            "URI" : "0"
+         }
       }
    },
    "release_status" : "stable",
@@ -48,7 +59,7 @@
          "web" : "https://github.com/plack/plack-middleware-methodoverride"
       }
    },
-   "version" : "0.16",
+   "version" : "0.17",
    "x_contributors" : [
       "Aristotle Pagaltzis <pagaltzis@gmx.de>",
       "David E. Wheeler <david@justatheory.com>",
