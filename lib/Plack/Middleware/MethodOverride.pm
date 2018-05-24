@@ -5,7 +5,7 @@ use Plack::Request ();
 
 package Plack::Middleware::MethodOverride;
 
-# ABSTRACT: Override REST methods to Plack apps via POST
+our $VERSION = '0.16';
 
 use parent 'Plack::Middleware';
 use Plack::Util::Accessor 'param';
@@ -51,7 +51,11 @@ sub header {
 
 __END__
 
-=head1 Synopsis
+=head1 NAME
+
+Plack::Middleware::MethodOverride - Override REST methods to Plack apps via POST
+
+=head1 SYNOPSIS
 
 In your Plack app:
 
@@ -73,7 +77,7 @@ Or override it via the C<X-HTTP-Method-Override> header in a request:
       'X-HTTP-Method-Override' => 'PUT'
   ]);
 
-=head1 Description
+=head1 DESCRIPTION
 
 Writing
 L<REST|http://en.wikipedia.org/wiki/Representational_State_Transfer>ful apps
@@ -129,6 +133,23 @@ Defaults to C<X-HTTP-Method-Override>, as used by Google for its APIs.
 Specifies the query parameter name to specify the overriding HTTP method.
 
 Defaults to C<x-tunneled-method>.
+
+=head1 AUTHOR
+
+Tatsuhiko Miyagawa
+
+David E. Wheeler
+
+Aristotle Pagaltzis
+
+=head1 COPYRIGHT
+
+2015- Tatsuhiko Miyagawa, David E. Wheeler, Aristotle Pagaltzis
+
+=head1 LICENSE
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =head1 Acknowledgements
 
