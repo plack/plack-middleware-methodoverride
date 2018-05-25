@@ -1,7 +1,9 @@
 {
    "abstract" : "Override REST methods to Plack apps via POST",
    "author" : [
-      "Tatsuhiko Miyagawa"
+      "Tatsuhiko Miyagawa <miyagawa@bulknews.net>",
+      "David E. Wheeler <david@justatheory.com>",
+      "Aristotle Pagaltzis <pagaltzis@gmx.de>"
    ],
    "dynamic_config" : 0,
    "generated_by" : "Dist::Milla version v1.0.20, Dist::Zilla version 6.012, CPAN::Meta::Converter version 2.150010",
@@ -61,12 +63,9 @@
    },
    "version" : "0.18",
    "x_contributors" : [
-      "Aristotle Pagaltzis <pagaltzis@gmx.de>",
-      "David E. Wheeler <david@justatheory.com>",
       "David Steinbrunner <dsteinbrunner@pobox.com>",
       "Henry Van Styn <vanstyn@intellitree.com>",
       "Karen Etheridge <ether@cpan.org>",
-      "Tatsuhiko Miyagawa <miyagawa@bulknews.net>",
       "Yuki Furuyama <yuki.furuyama@dena.com>"
    ],
    "x_generated_by_perl" : "v5.20.1",
