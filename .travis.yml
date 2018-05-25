@@ -1,5 +1,6 @@
 language: perl
 perl:
+  - "dev"
   - "5.8"
   - "5.10"
   - "5.12"
@@ -7,4 +8,15 @@ perl:
   - "5.16"
   - "5.18"
   - "5.20"
+  - "dev"
+  - "blead"
+
+env: COVERAGE=1
 sudo: false
+
+matrix:
+  allow_failures:
+    - perl: "blead"
+
+before_install:
+  - eval $(curl https://travis-perl.github.io/init) --auto
