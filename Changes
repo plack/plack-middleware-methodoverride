@@ -2,6 +2,10 @@ Revision history for Perl extension Plack::Middleware::MethodOverride.
 
 {{$NEXT}}
 
+0.19  2018-05-25 03:12:21 PDT
+      - Fix license and copyright that have been accidentally broken in
+        0.16-8 META files
+
 0.18  2018-05-24 23:01:57 PDT
       - Maintenance release to retroactively update Changes
 

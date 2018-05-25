@@ -61,7 +61,7 @@
          "web" : "https://github.com/plack/plack-middleware-methodoverride"
       }
    },
-   "version" : "0.18",
+   "version" : "0.19",
    "x_contributors" : [
       "David Steinbrunner <dsteinbrunner@pobox.com>",
       "Henry Van Styn <vanstyn@intellitree.com>",

@@ -5,7 +5,7 @@ use Plack::Request ();
 
 package Plack::Middleware::MethodOverride;
 
-our $VERSION = '0.18';
+our $VERSION = '0.19';
 
 use parent 'Plack::Middleware';
 use Plack::Util::Accessor 'param';
