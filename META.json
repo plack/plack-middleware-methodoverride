@@ -59,7 +59,7 @@
          "web" : "https://github.com/plack/plack-middleware-methodoverride"
       }
    },
-   "version" : "0.17",
+   "version" : "0.18",
    "x_contributors" : [
       "Aristotle Pagaltzis <pagaltzis@gmx.de>",
       "David E. Wheeler <david@justatheory.com>",
